@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link th:replace="partials/partials :: bootstrap"></link>
+</head>
+<body>
+<nav th:replace="partials/partials :: navbar"></nav>
+<h1>All Post</h1>
+
+<div th:each="post : ${posts}">
+    <h3 th:text="${post.title}"></h3>
+    <p th:text="${post.body}"></p>
+</div>
+<footer th:replace="partials/partials :: footer"></footer>
+<script th:replace="partials/partials :: script"></script>
+</body>
+</html>

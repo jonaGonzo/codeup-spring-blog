@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>Create Products</h1>
+
+<form th:action="@{/products/create}" th:method="POST">
+  <label for="name">Product Name</label>
+  <input id="name" type="text" placeholder="Enter Product Name">
+  <label for="price">Product Name</label>
+  <input id="price" type="number" placeholder="Enter Product Price">
+  <button>Create Product</button>
+</form>
+
+</body>
+</html>
