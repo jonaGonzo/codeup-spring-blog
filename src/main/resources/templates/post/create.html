@@ -5,16 +5,17 @@
     <title>Create Post</title>
 </head>
 <body>
-<form method="post">
+<form th:action="@{/posts}" th:method="POST">
+    <h1>Create Post</h1>
     <div class="container">
-    <label for="title">Post Title</label>
-    <input id="title" type="text" placeholder="Enter Title">
+    <label for="title">Post Title</label><br>
+    <input name="title" id="title" type="text" placeholder="Enter Title">
+    </div>
     <div>
-    <label for="body">Post</label>
-    <textarea id="body" placeholder="Enter Post"></textarea>
+    <label for="body">Post</label><br>
+    <textarea name="body" id="body" placeholder="Enter Post"></textarea>
     </div>
     <input id="submit" type="submit" value="Submit Post">
-    </div>
 </form>
 </body>
 </html>

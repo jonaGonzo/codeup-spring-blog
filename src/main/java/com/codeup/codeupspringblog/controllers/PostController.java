@@ -1,53 +1,66 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Post;
-import com.codeup.codeupspringblog.models.Product;
-import com.codeup.codeupspringblog.repositories.PostsRepository;
-import com.codeup.codeupspringblog.repositories.ProductsRepository;
+import com.codeup.codeupspringblog.models.User;
+import com.codeup.codeupspringblog.repositories.PostRepository;
+
+import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class PostController {
-    private PostsRepository postsDao;
+    private final PostRepository postsDao;
+    private final UserRepository usersDao;
 
-    public PostController(ProductsRepository productsDao){
+    public PostController(PostRepository postsDao, UserRepository usersDao) {
         this.postsDao = postsDao;
+        this.usersDao = usersDao;
     }
 
     @GetMapping("/posts")
     public String getAllPost(Model model) {
-//
-        List<Post> posts =  postsDao.findAll();
+        List<Post> posts = postsDao.findAll();
         model.addAttribute("posts", posts);
-        return "redirect:/post/index";
+        return "post/index";
     }
-//
-//    @GetMapping("/posts/{id}")
-//    public String getById(@PathVariable int id, Model model) {
-//        Post post = new Post(id, "Day in the Life", "It was all good until it wasn't.");
-//        model.addAttribute("post", post);
-//        return "post/show";
-//    }
 
-    @GetMapping("/create")
-    public String createPost() {
 
-        postsDao.save();
-        return "redirect:/posts";
+    @GetMapping("/posts/{id}")
+    public String getById(@PathVariable Long id, Model model) {
+        Post post = postsDao.findById(id).get();
+        model.addAttribute("post", post);
+        return "post/show";
+    }
+
+
+    @GetMapping("/post/create")
+    public String returnPostCreateForm(){
+        return "post/create";
     }
 
     @PostMapping("/posts")
-    public String createPost() {
-        postsDao.findAll();
-        return "redirect:/";
+    public String createPost(@RequestParam String title, @RequestParam String body) {
+//        System.out.println(title);
+//        System.out.println(body);
+        Post post = new Post(title, body);
+        User user = usersDao.findById(1L).get();
+        post.setUser(user);
+        postsDao.save(post);
+        return "redirect:/posts";
     }
+
+    @GetMapping("/post/edit")
+    public String editPost(){
+        Post editedPost = new Post(1L, "Updated Title", "Updated Body");
+        postsDao.save(editedPost);
+        return "redirect:/posts";
+    }
+
 }

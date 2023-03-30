@@ -1,16 +1,16 @@
 package com.codeup.codeupspringblog.controllers;
 
 import com.codeup.codeupspringblog.models.Product;
-import com.codeup.codeupspringblog.repositories.ProductsRepository;
+import com.codeup.codeupspringblog.repositories.ProductRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ProductController {
-    private ProductsRepository productsDao;
+    private ProductRepository productsDao;
 
-    public ProductController(ProductsRepository productsDao){
+    public ProductController(ProductRepository productsDao){
         this.productsDao = productsDao;
     }
 
