@@ -7,10 +7,7 @@ import com.codeup.codeupspringblog.repositories.PostRepository;
 import com.codeup.codeupspringblog.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,21 +31,28 @@ public class PostController {
 
     @GetMapping("/posts/{id}")
     public String getById(@PathVariable Long id, Model model) {
-        Post post = postsDao.findById(id).get();
-        model.addAttribute("post", post);
+        Post editedPost = postsDao.findById(id).get();
+        model.addAttribute("post", editedPost);
         return "post/show";
+    }
+    @PostMapping("posts/{id}/edit")
+    public String editPost(@ModelAttribute Post post, @PathVariable Long id){
+        Post editedPost = postsDao.findById(id).get();
+        editedPost.setTitle(post.getTitle());
+        editedPost.setBody(post.getBody());
+        postsDao.save(editedPost);
+        return "redirect:/posts";
     }
 
 
     @GetMapping("/post/create")
-    public String returnPostCreateForm(){
+    public String returnPostCreateForm(Model model){
+        model.addAttribute("post", new Post());
         return "post/create";
     }
 
-    @PostMapping("/posts")
+    @PostMapping("/post/create")
     public String createPost(@RequestParam String title, @RequestParam String body) {
-//        System.out.println(title);
-//        System.out.println(body);
         Post post = new Post(title, body);
         User user = usersDao.findById(1L).get();
         post.setUser(user);
