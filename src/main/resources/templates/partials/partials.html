@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Partials</title>
@@ -38,14 +39,20 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
-                </li>
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
+            <div class="mx-3">
+
+                    <li><a class="log color me-3" href="/logout">Logout</a></li>
+                    <li><a class="log color" href="/profile">Profile</a></li>
+
+                    <li><a class="log color" href="/login">Login</a></li>
+
+                </th:if>
+            </div>
         </div>
     </div>
 </nav>
