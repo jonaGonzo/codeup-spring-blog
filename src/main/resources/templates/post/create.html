@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Create Post</title>
+    <link th:replace="partials/partials :: bootstrap"></link>
 </head>
 <body>
+<nav th:replace="partials/partials :: navbar"></nav>
 <form th:action="@{/post/create}" th:method="POST">
     <h1>Create Post</h1>
     <div class="container">
@@ -17,5 +19,7 @@
     </div>
     <input id="submit" type="submit" value="Submit Post">
 </form>
+<footer th:replace="partials/partials :: footer"></footer>
+<script th:replace="partials/partials :: script"></script>
 </body>
 </html>

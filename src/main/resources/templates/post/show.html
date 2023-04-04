@@ -3,11 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Show</title>
+    <link th:replace="partials/partials :: bootstrap"></link>
 </head>
 <body>
+<nav th:replace="partials/partials :: navbar"></nav>
 <h1>Current Post</h1><br>
 <h4><span th:text="${post.id}"></span></h4>
 <h2 ><span th:text="${post.title}"></span></h2>
 <h3><span th:text="${post.getBody()}"></span></h3>
+<footer th:replace="partials/partials :: footer"></footer>
+<script th:replace="partials/partials :: script"></script>
 </body>
 </html>
